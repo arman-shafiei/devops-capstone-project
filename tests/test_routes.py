@@ -126,8 +126,16 @@ class TestAccountService(TestCase):
     # ADD YOUR TEST CASES HERE ...
 
     def test_list_all_accounts(self):
+        """It should Get a list of all Accounts"""
         self._create_accounts(3)
         response = self.client.get(BASE_URL)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         response_data = response.get_json()
         self.assertEqual(len(response_data),3)
+    
+    def test_list_all_accounts_not_found(self):
+        """It should Return an empty list of Accounts"""
+        response = self.client.get(BASE_URL)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_data = response.get_json()
+        self.assertEqual(len(response_data),0)
