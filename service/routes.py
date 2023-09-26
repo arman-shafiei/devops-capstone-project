@@ -62,8 +62,8 @@ def create_accounts():
 ######################################################################
 # ... place you code here to LIST accounts ...
 
-@app.route("/accounts", methods=["GET"])
 
+@app.route("/accounts", methods=["GET"])
 def list_all_accounts():
     """
         This route will list all Accounts
@@ -80,8 +80,8 @@ def list_all_accounts():
 ######################################################################
 # ... place you code here to READ an account ...
 
-@app.route("/accounts/<int:account_id>", methods=["GET"])
 
+@app.route("/accounts/<int:account_id>", methods=["GET"])
 def read_account(account_id):
     """
     This route will read an Account based the account_id
@@ -97,8 +97,8 @@ def read_account(account_id):
 ######################################################################
 # ... place you code here to UPDATE an account ...
 
-@app.route("/accounts/<int:account_id>", methods=["PUT"])
 
+@app.route("/accounts/<int:account_id>", methods=["PUT"])
 def update_account(account_id):
     """
     This route will update an Account based on the passed data
@@ -116,8 +116,8 @@ def update_account(account_id):
 ######################################################################
 # ... place you code here to DELETE an account ...
 
-@app.route("/accounts/<int:account_id>", methods=["DELETE"])
 
+@app.route("/accounts/<int:account_id>", methods=["DELETE"])
 def delete_account(account_id):
     """
     This endpoint will delete an Account based on the account_id
