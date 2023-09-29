@@ -190,7 +190,7 @@ class TestAccountService(TestCase):
 
     def test_delete_acount(self):
         """It should Delete an Account"""
-        account = self.create_accounts(1)[0]
+        account = self._create_accounts(1)[0]
         response = self.client.delete(
             f"{BASE_URL}/{account.id}"            
         )
