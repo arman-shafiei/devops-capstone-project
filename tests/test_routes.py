@@ -24,6 +24,8 @@ HTTPS_ENVIRON = {'wsgi.url_scheme': 'https'}
 ######################################################################
 #  T E S T   C A S E S
 ######################################################################
+
+
 class TestAccountService(TestCase):
     """Account Service Tests"""
 
@@ -133,14 +135,14 @@ class TestAccountService(TestCase):
         response = self.client.get(BASE_URL)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         response_data = response.get_json()
-        self.assertEqual(len(response_data),3)
-    
+        self.assertEqual(len(response_data), 3)
+
     def test_list_all_accounts_not_found(self):
         """It should Return an empty list of Accounts"""
         response = self.client.get(BASE_URL)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         response_data = response.get_json()
-        self.assertEqual(len(response_data),0)
+        self.assertEqual(len(response_data), 0)
 
     def test_read_account(self):
         """It should Read a single Account"""
@@ -150,14 +152,14 @@ class TestAccountService(TestCase):
         )
         self.assertEqual(response.status_code,status.HTTP_200_OK)
         response_data = response.get_json()
-        self.assertEqual(response_data["name"],account.name)
+        self.assertEqual(response_data["name"], account.name)
 
     def test_read_account_not_found(self):
         """It should not Read an Account that couldn't been found"""
         response = self.client.get(
             f"{BASE_URL}/0", content_type="application/json"
         )
-        self.assertEqual(response.status_code,status.HTTP_404_NOT_FOUND)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_update_account(self):
         """It should Update an Account that exists"""
@@ -166,7 +168,7 @@ class TestAccountService(TestCase):
             BASE_URL,
             json=old_account.serialize()
         )
-        self.assertEqual(response.status_code,status.HTTP_201_CREATED)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         new_account = response.get_json()
         new_account["name"] = "New name"
@@ -175,7 +177,7 @@ class TestAccountService(TestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         updated_account = response.get_json()
-        self.assertEqual(updated_account["name"],new_account["name"])
+        self.assertEqual(updated_account["name"], new_account["name"])
 
     def test_update_account_not_found(self):
         """It should not Update any Account that doesn't exist"""
@@ -188,7 +190,7 @@ class TestAccountService(TestCase):
 
     def test_delete_acount(self):
         """It should Delete an Account"""
-        account = self._create_accounts(1)[0]
+        account = self.create_accounts(1)[0]
         response = self.client.delete(
             f"{BASE_URL}/{account.id}"            
         )
@@ -200,7 +202,7 @@ class TestAccountService(TestCase):
             f"{BASE_URL}/0"
         )
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-    
+
     def test_method_not_allowed(self):
         """It should not allow an illegal method call"""
         response = self.client.delete(BASE_URL)
