@@ -64,7 +64,7 @@ spec:
       type: string
       default: "-v"
     - name: database_uri
-      description: The URI of postgres database
+      description: The URI of the database
       type: string
       default: "sqlite:///test.db"
   steps:
