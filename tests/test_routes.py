@@ -150,7 +150,7 @@ class TestAccountService(TestCase):
         response = self.client.get(
             f"{BASE_URL}/{account.id}", content_type="application/json"
         )
-        self.assertEqual(response.status_code,status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         response_data = response.get_json()
         self.assertEqual(response_data["name"], account.name)
 
@@ -183,24 +183,18 @@ class TestAccountService(TestCase):
         """It should not Update any Account that doesn't exist"""
         new_account = AccountFactory().serialize()
         new_account["name"] = "New name"
-        response = self.client.put(
-            f"{BASE_URL}/{new_account['id']}", json=new_account
-        )
+        response = self.client.put(f"{BASE_URL}/{new_account['id']}", json=new_account)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_delete_acount(self):
         """It should Delete an Account"""
         account = self._create_accounts(1)[0]
-        response = self.client.delete(
-            f"{BASE_URL}/{account.id}"            
-        )
+        response = self.client.delete(f"{BASE_URL}/{account.id}")
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_delete_acount_not_found(self):
         """It should not Delete an Account that doesn't exist"""
-        response = self.client.delete(
-            f"{BASE_URL}/0"
-        )
+        response = self.client.delete(f"{BASE_URL}/0")
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_method_not_allowed(self):
